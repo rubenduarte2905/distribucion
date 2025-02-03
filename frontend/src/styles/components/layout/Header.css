@@ -1,16 +1,18 @@
-header{
-    background-color: #2e64a1;
-    padding: 16px 0;
+.header{
+    background-color: #19191a;
+    padding: 4px 0;
+    margin-top: 4px;
+display: flex;
 
 }
 
-h1{
+h2, img{
     color:white;
     font-size: 40px;
     font-weight: 100;
     font-style: italic;
-    display: inline-block;
-    position: relative;
+    
+    position:inherit;
     bottom: 35px;
     margin-left: 10px;
 }

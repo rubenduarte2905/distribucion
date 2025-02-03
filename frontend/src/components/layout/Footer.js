@@ -1,11 +1,12 @@
 import React from 'react';
 import '../../styles/components/layout/Footer.css';
-const Footer = (props)=>{
+
+const Footer = (props) => {
     return (
         <footer>
-            <p>Derechos reservados. Transportes X 2025</p>
+            <p><b>©</b> Derechos Reservados DM Sistemas(2025)</p>
         </footer>
     );
 }
 
-export default Footer; 
+export default Footer;

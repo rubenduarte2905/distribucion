@@ -1,6 +1,7 @@
 nav{
-    background-color: #6da9ed;
-    margin-bottom: 20px;
+    background-color: #19191a;
+    margin-bottom: 16px;
+    padding: 10px;
 }
 
 nav ul{
@@ -9,13 +10,14 @@ nav ul{
     padding: 0;
     display: flex;
 
+
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     padding: 3px 6px;
-    display: bock;
+    display: block;
     text-align: center;
 }
 
