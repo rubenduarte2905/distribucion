@@ -9,6 +9,14 @@ router.get('/', function (req, res, next){
     });
 });
 
+
+router.get('/logout', function (req, res, next){
+    req.session.destroy();
+    res.render('admin/login', {         //login.hbs
+        layout:'admin/layout'           //layout distintos para index.js y user.js
+    });
+});
+
 router.post ('/', async (req, res, next)=>{
      
     try{
@@ -21,6 +29,11 @@ router.post ('/', async (req, res, next)=>{
             console.log("(1) "+rol);
 
             if (data != undefined){
+
+                req.session.id_usuario = data.id;
+                req.session.nombre = data.usuario;
+                req.session.rol = data.rol;
+
               
                 if(data.rol == "COMPRAS"){
                     console.log("(2) "+rol);

@@ -6,14 +6,17 @@ var comprasModel = require('../../models/comprasModel');
 router.get('/', async (req, res, next)=>{
     var compras = await comprasModel.getCompras();
     res.render('admin/compras', {         
-        layout:'admin/layout' , compras
+        layout:'admin/layout' ,
+        usuario: req.session.nombre,
+        compras
     });
 });
 
 
 router.get('/agregar', (req, res, next)=>{
     res.render('admin/agregar', {
-        layout: 'admin/layout'
+        layout: 'admin/layout',
+        usuario: req.session.nombre,
     });
 });
 
@@ -41,18 +44,19 @@ router.post('/agregar', async (req, res, next)=>{
 });
 -
 router.get('/eliminar/:id', async (req, res, next)=>{
-    console.log("eliminar");
+
     const id =req.params.id;
     await comprasModel.deleteComprasById(id);
     res.redirect('/admin/compras')
 });
 
 router.get('/modificar/:id', async (req, res, next)=>{
-    console.log('get');
+
     let id =req.params.id;
     let compra = await comprasModel.getCompraById(id);
     res.render('admin/modificar', { 
         layout: 'admin/layout',
+        usuario: req.session.nombre,
         compra
     });
 });
@@ -75,7 +79,8 @@ router.post('/modificar', async (req, res, next)=>{
         console.log(error);
         res.render('admin/modificar',{
             layout: 'admin/layout',
-            error:true, message: 'No se modificó la compras'
+            error:true,
+            message: 'No se modificó la compras'
         });
     }
 });  
