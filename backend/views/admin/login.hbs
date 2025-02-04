@@ -1,0 +1,50 @@
+<div class="container"></div>
+
+<div class="row" style="margin:100px 0">
+  <div class="col">
+    <form method="POST" action="/admin/login">
+
+      <section class="vh-10" style="background-color: #fff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+
+                  <h3 class="mb-5">Inicio de Sesión</h3>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" id="usuario" name="usuario" class="form-control form-control-lg" />
+                    <label class="form-label" for="usuario">Usuario</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <select class="form-select form-select-lg mb-3" name="rol" id="rol">
+                      <option selected>Selecciona el rol</option>
+                      <option value="COMPRAS">COMPRAS</option>
+                      <option value="DISTRIBUCION">DISTRIBUCION</option>
+                    </select>
+                    <label class="form-label" for="password">Rol</label>
+                  </div>
+
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block"
+                    type="submit">Login</button>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {{#if error}}
+      <p>El usuario o contraseña es incorrecto</p>
+      {{/if}}
+    </form>
+
+  </div>

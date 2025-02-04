@@ -1,0 +1,101 @@
+<div class="container" style="margin:100px auto">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4 class="text-danger">Modificar los datos de la compra</h4>
+            <hr>
+            <form action="/admin/compras/modificar" method="post">
+
+
+                <input type="hidden" value="{{compra.id}}" name="id">
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="expedienteOC">Expediente</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="expedienteOC" id="expedienteOC">
+                        <option value="{{compra.expedienteOC}}" selected>{{compra.expedienteOC}}</option>
+                        <option value="0001/2025">0001/2025</option>
+                        <option value="0002/2025">0002/2025</option>
+                        <option value="0003/2025">0003/2025</option>
+                    </select>
+                </div>
+
+  <!--      <select name="proveedor" id="proveedor">
+            {{#each provider}}
+                <option value="{{proveedor.descripcion}}" selected>{{proveedor.descripcion}}</option>
+            {{/each}}
+        </select>  -->
+
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="proveedor">Proveedor</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="proveedor" id="proveedor">
+                        <option value="{{compra.proveedor}}" selected>{{compra.proveedor}}</option>
+                     
+                        <option value="Lacto">Lacto S.A</option>
+                        <option value="LaAnonima">La Anónima</option>
+                        <option value="FrioSur">FrioSur SA</option>
+                    </select>
+                    <!--                 <label class="form-label" for="password">Proveedor</label>
+                      <input type="text" value="{{compra.proveedor}}" name="proveedor">   -->
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="expedienteOC">Mercaderia</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="mercaderia" id="mercaderia">
+                        <option value="{{compra.mercaderia}}" selected>{{compra.mercaderia}}</option>
+                        <option value="Alimentos Secos x 10 productos">Alimentos Secos </option>
+                        <option value="Leña">Leña</option>
+                        <option value="Gas x 10 kg">Garrafas de Gas</option>
+                    </select>
+
+                    <!--                   <label class="form-label" for="password">Mercaderia</label>
+                    <input type="text" value="{{compra.mercaderia}}" name="mercaderia">  -->
+                </div>
+
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="fechaAltaEntregas">fecha Alta Entrega</label>
+
+                    <div class="form-group ">
+                        <div class="col-mb-2">
+                            <input type="text" class="form-control border-danger" value="{{compra.fechaAltaEntregas}}" name="fechaAltaEntregas">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="lugarDeposito">Depósito</label>
+                     <option value="{{compra.deposito}}" selected>{{compra.deposito}}</option>
+                    <select class="form-select form-select-lg mb-3 border-danger"  name="lugarDeposito" id="lugarDeposito">
+
+                        <option value="Centro Distribución">Centro Distribucion</option>
+                        <option value="DepósitoAmaya">Depósito Mario Amaya</option>
+                        <option value="Depósito Menfa">Depósito Menfa</option>
+                    </select>
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="cantidadTotal">Cantidad Mercaderia</label>
+                    <div class="form-group ">
+                        <div class="col-mb-2">
+
+                            <input type="text" class="form-control border-danger" value="{{compra.cantidadTotal}}"
+                                name="cantidadTotal">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-dark">Modificar</button>
+            </form>
+
+            {{#if error}}
+            <h5>{{message}}</h5>
+            {{/if}}
+        </div>
+    </div>
+
+</div>
+
+

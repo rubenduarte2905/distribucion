@@ -1,0 +1,74 @@
+<div class="container" style="margin:100px auto">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4 class="text-danger">Agregar una compra</h4>
+<hr>
+            <form action="/admin/compras/agregar" method="post">
+
+              <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="expedienteOC">Expediente</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="expedienteOC" id="expedienteOC">
+                        <option selected>Selecciona el Expediente</option>
+                        <option value="0001/2025">0001/2025</option>
+                        <option value="0002/2025">0002-2025</option>
+                        <option value="0003/2025">0003-2025</option>
+                    </select>
+
+                </div>
+
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="proveedor">Proveedor</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="proveedor" id="proveedor">
+                        <option selected>Selecciona el Proveedor</option>
+                        <option value="Lacto">Lacto S.A</option>
+                        <option value="LaAnonima">La Anónima</option>
+                        <option value="FrioSur">FrioSur SA</option>
+                    </select>
+
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="mercaderia">Mercadería</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="mercaderia" id="mercaderia">
+                        <option selected>Selecciona la mercadería</option>
+                        <option value="Alimentos Secos x 10 productos">Alimentos Secos </option>
+                        <option value="Leña">Leña</option>
+                        <option value="Gas x 10 kg">Garrafas de Gas</option>
+                    </select>
+
+                </div>
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="lugarDeposito">Depósito</label>
+                    <select class="form-select form-select-lg mb-3 border-danger " name="lugarDeposito" id="lugarDeposito">
+                        <option selected>Selecciona el depósito</option>
+                        <option value="Centro Distribución">Centro Distribucion</option>
+                        <option value="DepósitoAmaya">Depósito Mario Amaya</option>
+                        <option value="Depósito Menfa">Depósito Menfa</option>
+                    </select>
+
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="fechaAltaEntregas">fecha Alta Entrega</label>
+                    <input type="date" class="form-control border-danger" placeholder="" name="fechaAltaEntregas" id="fechaAltaEntregas">
+                </div>
+                
+
+                <div class="form-group">
+                    <div data-mdb-input-init class="form-outline mb-3"></div> 
+                    <label class="form-label text-danger" for="cantidadTotal">Cantidad Total</label>
+                    <input type="number" class="form-control border-danger" placeholder="Cantidad" name="cantidadTotal">
+
+                </div>
+                <hr>      
+               <div class="form-group"> <button type="submit" class="btn btn-dark">Guardar</button></div></div> 
+        </div>
+        </form>
+        {{#if error}}
+        <h5>{{message}}</h5>
+        {{/if}}
+    </div>
+</div>
+
+</div>  
