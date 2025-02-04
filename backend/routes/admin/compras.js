@@ -1,10 +1,35 @@
 var express = require('express');
 var router = express.Router();
 
+var util = require('util');
+var cloudinary = require ('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload); 
 var comprasModel = require('../../models/comprasModel');
+
+
 
 router.get('/', async (req, res, next)=>{
     var compras = await comprasModel.getCompras();
+    compras = compras.map(compras=>{
+        if(compras.imagen_id){
+            const imagen = cloudinary.image(compras.imagen_id,{
+                width:100,
+                height:100,
+                crop:'fill'
+            });
+           
+            return{
+                ...compras,
+                imagen
+              }
+            }else{
+                return{
+                    ...compras,
+                    imagen:''
+                }
+            }
+        });
+    
     res.render('admin/compras', {         
         layout:'admin/layout' ,
         usuario: req.session.nombre,
@@ -22,10 +47,15 @@ router.get('/agregar', (req, res, next)=>{
 
 router.post('/agregar', async (req, res, next)=>{
     try{
-          console.log("AGRE GAR");
-          if(req.body.expedienteOC != "" && req.body.proveedor !="" && req.body.mercaderia !="" && req.body.fechaAltaEntregas !="" && req.body.lugarDeposito !="" && req.body.cantidadTotal != ""){
-            await comprasModel.insertCompra(req.body);
-            res.redirect('/admin/compras')
+         var imagen_id ='';
+         if (req.files && Object.keys(req.files).length>0){
+            imagen = req.files.imagen;
+            imagen_id = (await uploader(imagen.tempFilePath)).public_id; 
+         }
+          if(req.body.expedienteOC != "" && req.body.proveedor !="" && req.body.mercaderia !="" 
+             && req.body.fechaAltaEntregas !="" && req.body.lugarDeposito !="" && req.body.cantidadTotal != ""){
+            await comprasModel.insertCompra({...req.body, imagen_id});
+            res.redirect('/admin/compras');
           }else{
             res.render('/admin/agregar', {
                 layout:'admin/layout', 
@@ -46,6 +76,10 @@ router.post('/agregar', async (req, res, next)=>{
 router.get('/eliminar/:id', async (req, res, next)=>{
 
     const id =req.params.id;
+    let compras = await comprasModel.getNovedadById(id);
+    if (compras.imagen_id){
+        await (destroy(compras.imagen_id));
+    }  
     await comprasModel.deleteComprasById(id);
     res.redirect('/admin/compras')
 });
@@ -58,19 +92,42 @@ router.get('/modificar/:id', async (req, res, next)=>{
         layout: 'admin/layout',
         usuario: req.session.nombre,
         compra
-    });
+    }); 
 });
+
+const destroy = util.promisify(cloudinary.uploader.destroy);
+
 
 router.post('/modificar', async (req, res, next)=>{
    
     try{
+         let imagen_id = req.body.imagen_original ;
+         let borrar_imagen_vieja = false;
+         if (req.body.imagen_borrar ==="1"){
+            imagen_id = null;
+            borrar_imagen_vieja = true;
+         }else{
+            if (req.files && Object.keys(req.files).length>0){
+                imagen = req.files.imagen;
+                imagen_id = (await 
+                    uploader(imagen.tempFilePath)).public_id;
+                    borrar_imagen_vieja = true;
+            }
+         } 
+         if (borrar_imagen_vieja && req.body.imagen_original){
+            await (destroy(req.body.imagen_original));
+         } 
+
+
+
           let obj={
             expedienteOC: req.body.expedienteOC,
             proveedor: req.body.proveedor,
             mercaderia: req.body.mercaderia,
             fechaAltaEntregas: req.body.fechaAltaEntregas,
             lugarDeposito: req.body.lugarDeposito,
-            cantidadTotal: req.body.cantidadTotal
+            cantidadTotal: req.body.cantidadTotal,
+            imagen_id
           }
             console.log("3 - "+obj);
             await comprasModel.modificarCompraById(obj, req.body.id);

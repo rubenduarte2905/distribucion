@@ -54,9 +54,18 @@
                         <option value="Leña">Leña</option>
                         <option value="Gas x 10 kg">Garrafas de Gas</option>
                     </select>
+                <div class="form-group">
+                    <div data-mdb-input-init class="form-outline mb-3"></div> 
+                    <label class="form-label text-danger" for="imagen">Imagen </label> 
+                        <input type="file" class="form-control border-danger" id="imagen" name="imagen">
+                    <p>
+                        <label>
+                            <input type="checkbox" name="imagen_borrar" id="imagen_borrar" value="1">Elimina imagen actual?
+                        </label>  
+                        <input type="hidden" name="imagen_original" id="imagen_original" value="{{compras.imagen_id}}">
+                    </p> 
+                </div>
 
-                    <!--                   <label class="form-label" for="password">Mercaderia</label>
-                    <input type="text" value="{{compra.mercaderia}}" name="mercaderia">  -->
                 </div>
 
 

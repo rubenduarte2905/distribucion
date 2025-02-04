@@ -11,7 +11,7 @@
         <div class="col-6 offset-3">
             <h4 class="text-danger">Agregar una compra</h4>
 <hr>
-            <form action="/admin/compras/agregar" method="post">
+            <form action="/admin/compras/agregar" method="post" enctype="multipart/form-data">
 
               <div data-mdb-input-init class="form-outline mb-3">
                     <label class="form-label text-danger" for="expedienteOC">Expediente</label>
@@ -46,6 +46,15 @@
                     </select>
 
                 </div>
+
+                <div class="form-group">
+                    <div data-mdb-input-init class="form-outline mb-3"></div> 
+                    <label class="form-label text-danger" for="imagen">Imagen 
+                        <input type="file" class="form-control border-danger" id="imagen" name="imagen">
+                        </label>
+                   
+                </div>
+
                 <div data-mdb-input-init class="form-outline mb-3">
                     <label class="form-label text-danger" for="lugarDeposito">Depósito</label>
                     <select class="form-select form-select-lg mb-3 border-danger " name="lugarDeposito" id="lugarDeposito">
@@ -54,8 +63,8 @@
                         <option value="DepósitoAmaya">Depósito Mario Amaya</option>
                         <option value="Depósito Menfa">Depósito Menfa</option>
                     </select>
-
                 </div>
+
 
                 <div data-mdb-input-init class="form-outline mb-3">
                     <label class="form-label text-danger" for="fechaAltaEntregas">fecha Alta Entrega</label>
