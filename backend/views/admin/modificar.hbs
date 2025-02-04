@@ -11,7 +11,7 @@
         <div class="col-6 offset-3">
             <h4 class="text-danger">Modificar los datos de la compra</h4>
             <hr>
-            <form action="/admin/compras/modificar" method="post">
+            <form action="/admin/compras/modificar" method="post" enctype="multipart/form-data">
 
 
                 <input type="hidden" value="{{compra.id}}" name="id">
@@ -55,17 +55,13 @@
                         <option value="Gas x 10 kg">Garrafas de Gas</option>
                     </select>
                 <div class="form-group">
-                    <div data-mdb-input-init class="form-outline mb-3"></div> 
-                    <label class="form-label text-danger" for="imagen">Imagen </label> 
-                        <input type="file" class="form-control border-danger" id="imagen" name="imagen">
-                    <p>
-                        <label>
-                            <input type="checkbox" name="imagen_borrar" id="imagen_borrar" value="1">Elimina imagen actual?
-                        </label>  
-                        <input type="hidden" name="imagen_original" id="imagen_original" value="{{compras.imagen_id}}">
-                    </p> 
-                </div>
-
+                     <p>
+                       <label>Imagen: <input type="file" name="imagen" id="imagen" /></label>
+                     </p>   
+                     <p>
+                        <label><input type="checkbox" name="borrar_imagen" id="borrar_imagen" value="1"> Elimina la imagen actual?</label>
+                        <input type="hidden" name="imagen_original" id="imagen_original" value="{{compras.iamgen_id}}">
+                     </p>
                 </div>
 
 

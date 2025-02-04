@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
+var comprasModel = require('../../models/comprasModel');
 var util = require('util');
 var cloudinary = require ('cloudinary').v2;
 const uploader = util.promisify(cloudinary.uploader.upload); 
-var comprasModel = require('../../models/comprasModel');
-
+const destroy = util.promisify(cloudinary.uploader.destroy);
 
 
 router.get('/', async (req, res, next)=>{
     var compras = await comprasModel.getCompras();
+
     compras = compras.map(compras=>{
         if(compras.imagen_id){
             const imagen = cloudinary.image(compras.imagen_id,{
@@ -30,6 +30,9 @@ router.get('/', async (req, res, next)=>{
             }
         });
     
+    fecha= compras.fechaAltaEntregas;
+    console.log(fecha+" "+compras.fechaAltaEntregas);
+
     res.render('admin/compras', {         
         layout:'admin/layout' ,
         usuario: req.session.nombre,
@@ -76,7 +79,7 @@ router.post('/agregar', async (req, res, next)=>{
 router.get('/eliminar/:id', async (req, res, next)=>{
 
     const id =req.params.id;
-    let compras = await comprasModel.getNovedadById(id);
+    let compras = await comprasModel.getCompraById(id);
     if (compras.imagen_id){
         await (destroy(compras.imagen_id));
     }  
@@ -95,7 +98,7 @@ router.get('/modificar/:id', async (req, res, next)=>{
     }); 
 });
 
-const destroy = util.promisify(cloudinary.uploader.destroy);
+
 
 
 router.post('/modificar', async (req, res, next)=>{
@@ -103,14 +106,13 @@ router.post('/modificar', async (req, res, next)=>{
     try{
          let imagen_id = req.body.imagen_original ;
          let borrar_imagen_vieja = false;
-         if (req.body.imagen_borrar ==="1"){
+         if (req.body.borrar_imagen ==="1"){
             imagen_id = null;
             borrar_imagen_vieja = true;
          }else{
             if (req.files && Object.keys(req.files).length>0){
                 imagen = req.files.imagen;
-                imagen_id = (await 
-                    uploader(imagen.tempFilePath)).public_id;
+                imagen_id = (await uploader(imagen.tempFilePath)).public_id;
                     borrar_imagen_vieja = true;
             }
          } 
@@ -124,12 +126,12 @@ router.post('/modificar', async (req, res, next)=>{
             expedienteOC: req.body.expedienteOC,
             proveedor: req.body.proveedor,
             mercaderia: req.body.mercaderia,
-            fechaAltaEntregas: req.body.fechaAltaEntregas,
+            fechaAltaEntregas: convertirFecha(req.body.fechaAltaEntregas),
             lugarDeposito: req.body.lugarDeposito,
             cantidadTotal: req.body.cantidadTotal,
             imagen_id
           }
-            console.log("3 - "+obj);
+          
             await comprasModel.modificarCompraById(obj, req.body.id);
             res.redirect('/admin/compras');
         }  catch (error){
@@ -141,5 +143,12 @@ router.post('/modificar', async (req, res, next)=>{
         });
     }
 });  
+
+//-------------------------------------------------------------------------
+function convertirFecha(string) {
+    var fecha = string.split('-');
+    console.log("zz "+fecha[2] + '-' + fecha[1] + '-' + fecha[0]);
+    return fecha[2] + '-' + fecha[1] + '-' + fecha[0];
+}
 
 module.exports = router
