@@ -32,12 +32,12 @@ const ComprasPage= (props) => {
                {loading ? (
                   <p>Cargando...</p>
                ):(
-                    compras.map(item=> <ComprasItem key={item.id}
-                    expediente={item.expedienteOC}
+                    compras.map(item => <ComprasItem key={item.id}
+                    expedienteOC={item.expedienteOC}
                     mercaderia={item.mercaderia}
                     proveedor={item.proveedor}
-                    fechaAltaEntrega={item.fechaAltaEntrega}
-                    deposito = {item.deposito}
+                    fechaAltaEntregas={item.fechaAltaEntregas}
+                    lugarDeposito = {item.lugarDeposito}
                     cantidadTotal = {item.cantidadTotal}
                     imagen = {item.imagen}  />
 
