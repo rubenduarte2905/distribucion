@@ -1,0 +1,58 @@
+
+<div class="container" style="margin:100px auto">    <div class="row">
+        <div class="col">
+           <p class="text-right">Usuario: {{ usuario }} !
+            <a class="btn btn-danger" href="/admin/login/logout">Cerrar sesión
+            <i class = "fas fa-sign-out-alt"></i></a>    
+            </p>  
+        </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4 class="text-danger">Entrega de mercaderia</h4>
+<hr>
+            <form action="/admin/entregas/agregar" method="post" >
+
+              <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="expedienteOC">Expediente</label>
+                    <select class="form-select form-select-lg mb-3 border-danger" name="expedienteOC" id="expedienteOC">
+                        <option selected>Selecciona el Expediente</option>
+                        <option value="0001/2025">0001/2025</option>
+                        <option value="0002/2025">0002-2025</option>
+                        <option value="0003/2025">0003-2025</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <div data-mdb-input-init class="form-outline mb-3"></div> 
+                    <label class="form-label text-danger" for="beneficiario">Beneficiario</label>
+                    <input type="text" class="form-control border-danger" placeholder="Beneficiario" name="beneficiario">
+
+                </div>
+
+
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <label class="form-label text-danger" for="fechaEntrega">fecha Entrega</label>
+                    <input type="date" class="form-control border-danger" placeholder="" name="fechaEntrega" id="fechaEntrega">
+                </div>
+                
+
+                <div class="form-group">
+                    <div data-mdb-input-init class="form-outline mb-3"></div> 
+                    <label class="form-label text-danger" for="cantidad">Cantidad Total</label>
+                    <input type="number" class="form-control border-danger" placeholder="Cantidad" name="cantidad">
+
+                </div>
+                <hr>      
+               <div class="form-group"> <a href="/admin/login" class="btn btn-success">Salir</a> <button type="submit" class="btn btn-dark">Guardar</button></div></div> 
+        </div>
+        </form>
+        {{#if error }}
+        <h5>{{message}}</h5>
+        {{/if}}
+
+
+    </div>
+</div>
+
+</div>  

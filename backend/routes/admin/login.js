@@ -30,20 +30,20 @@ router.post ('/', async (req, res, next)=>{
 
             if (data != undefined){
 
-                req.session.id_usuario = data.id;
-                req.session.nombre = data.usuario;
-                req.session.rol = data.rol;
+            
+            req.session.id_usuario = data.id;
+            req.session.nombre = data.usuario;
+            req.session.rol = data.rol;
 
               
-                if(data.rol == "COMPRAS"){
-                    console.log("(2) "+rol);
+                if(data.rol === "COMPRAS"){
+                    console.log("(2-a) "+rol);
                     res.redirect('/admin/compras');
-                }else{
-                          res.render('admin/login',{
-                          layout: 'admin/layout',
-                          error:true
-                      });
-                    }
+                }else if(data.rol === "DISTRIBUCION"){
+                    console.log("(2-b) "+rol);
+                    res.redirect('/admin/entregas');
+
+                }
             }
          } catch (error){
         console.log(error);

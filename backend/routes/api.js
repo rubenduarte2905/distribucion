@@ -12,8 +12,8 @@ router.get('/compras', async (req, res, next)=>{
     compras = compras.map(compras=>{
         if(compras.imagen_id){
             const imagen = cloudinary.url(compras.imagen_id,{
-                width:100,
-                height:100,
+                width:60,
+                height:60,
                 crop:'fill'
             });
            

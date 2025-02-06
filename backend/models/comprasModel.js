@@ -61,6 +61,34 @@ async function modificarCompraById(obj, id){
 
 //--------------------------------------------------------------------
 
+async function getCompraByExpediente(expediente){
+    console.log ("Exp: "+expediente);
+    var query ="Select * FROM compras WHERE expedienteOC = ?";
+    var rows = await pool.query(query,[expediente]);
+    return rows[0];
+}
+
+
+async function actualizarStock(obj){
+    console.log("+++++"+obj.expedienteOC);
+    estadoActual = await getCompraByExpediente(obj.expedienteOC)
+    cantidadTotal = parseInt(estadoActual.cantidadTotal);
+    cantidad = parseInt(obj.cantidad);
+    if (cantidad > cantidadTotal){
+        return 0;
+    }else{
+    cantidadTotal -=cantidad;
+    estadoActual.cantidadTotal = cantidadTotal.toString();
+    console.log("est: "+estadoActual.cantidadTotal);
+    
+    await modificarCompraById(estadoActual, estadoActual.id);
+
+
+    }
+    
+        
+
+}
 
 
 //---FUNCIONES---------------------------------------------------------
@@ -77,4 +105,4 @@ function convertirFechaCorta(fecha){
     }
     
 
-module.exports ={ getCompras,  deleteComprasById, insertCompra, getCompraById, modificarCompraById } 
+module.exports ={ getCompras,  deleteComprasById, insertCompra, getCompraById, modificarCompraById, actualizarStock, getCompraByExpediente } 
