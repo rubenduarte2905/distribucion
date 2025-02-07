@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.imagen {
+   background-image: url(/images/alimento.png);
+   background-size:contain;
+}
 
 body {
   font-family: sans-serif;
@@ -23,15 +27,15 @@ body {
 .holder {
 
   max-width: 960px;
-  margin: 0 auto;
-
+  margin: 0;
+  padding:0%;
 }
 
 
 
 .header {
   background-color: #19191a;
-  padding: 4px 0;
+  padding: 4px 0px;
   margin-top: 4px;
   display:flex;
 

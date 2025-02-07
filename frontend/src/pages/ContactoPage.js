@@ -1,6 +1,7 @@
 import '../styles/components/pages/ContactoPage.css';
 import {useState} from 'react';
 import axios from 'axios';
+import { FaPhone, FaWhatsapp, FaEnvelope, FaFacebook} from "react-icons/fa";
 
 
 
@@ -43,28 +44,28 @@ const ContactoPage = (props) => {
 
 
     return (
-        <main className="holder contacto">
+        <main className=" holder contacto">
 
             <div>
  
                 <form action="/contacto" method="post" onSubmit={handleSubmit} className="formulario">
-                <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" class="form-control"  value = {formData.nombre} onChange = {handleChange}  />
-                    </div>
+                   <p>
+                        <label for="nombre" >Nombre</label>
+                        <input type="text" name="nombre"   value = {formData.nombre} onChange = {handleChange}  />
+                    </p>
                   
-                    <div class="mb-3">
-                         <label for="nombre" class="form-label">email</label>
-                        <input type="text" name="email" class="form-control"  value = {formData.email} onChange = {handleChange}   />
-                    </div>    
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Telefono</label>
-                        <input type="text" name="telefono" class="form-control"  value = {formData.telefono} onChange = {handleChange}   />
-                    </div>
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Mensaje</label>
-                        <textarea type="text" name="mensaje" class="form-control"  value = {formData.mensaje} onChange = {handleChange}></textarea> 
-                    </div>
+                    <p>
+                         <label for="nombre" >email</label>
+                        <input type="text" name="email"   value = {formData.email} onChange = {handleChange}   />
+                    </p>    
+                    <p>
+                        <label for="nombre" >Telefono</label>
+                        <input type="text" name="telefono"  value = {formData.telefono} onChange = {handleChange}   />
+                    </p>
+                    <p>
+                        <label for="nombre" >Mensaje</label>
+                        <textarea type="text" name="mensaje"   value = {formData.mensaje} onChange = {handleChange}></textarea> 
+                    </p>
                     <div class="acciones"><input type="submit" value="Enviar" />
                     </div>
                 </form>
@@ -73,14 +74,13 @@ const ContactoPage = (props) => {
             </div>
             <div>
                 <h2>Centro de Distribución</h2>
-                <ul>
-                    <li>Teléfono: 0280 4432022</li>
-                    <li>Email: admin@distrisoc.com</li>
-                    <li>Facebook: distrisoc01</li>
-                    <li>Twitter: "@distrisoc01</li>
-                    <li>X: "#distrisoc01</li>
-
-                </ul>
+              
+                    <FaPhone/>: 0280 4432022 <br/>
+                    <FaEnvelope/>: admin@distrisoc.com <br/>
+                    <FaFacebook/>: distrisoc01 <br/>
+                    <FaWhatsapp/>: "+5492804402154 <br/>
+                   
+                
             </div>  
         </main>
 
