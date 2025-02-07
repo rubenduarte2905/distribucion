@@ -15,7 +15,7 @@ var loginRouter = require('./routes/admin/login');
 var comprasRouter = require('./routes/admin/compras');
 var entregasRouter = require('./routes/admin/entregas');
 var apiRouter = require('./routes/api');
-
+var apiEntregasRouter = require('./routes/apiEntregas');
 var app = express();
 
 // view engine setup
@@ -57,8 +57,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/compras', secured, comprasRouter);
-app.use('/admin/entregas', entregasRouter);
+app.use('/admin/entregas', secured, entregasRouter);
 app.use('/api', cors(), apiRouter);
+app.use('/apiEntregas', cors(), apiEntregasRouter);
 
 
 // catch 404 and forward to error handler

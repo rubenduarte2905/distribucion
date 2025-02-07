@@ -51,11 +51,3 @@ const ComprasPage= (props) => {
     }
 
 export default ComprasPage;
-
-/*
-<!--             <h2>Compras</h2>
-<h1>Expediente</h1>
-<h2>Mercaderia</h2>
-<h4>Proveedor/fechaEntrega/Deposito</h4>
-<h4> Cantidad total </h4> 
-<h4> Imagen </h4> --> */

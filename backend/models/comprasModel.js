@@ -75,14 +75,14 @@ async function actualizarStock(obj){
     cantidadTotal = parseInt(estadoActual.cantidadTotal);
     cantidad = parseInt(obj.cantidad);
     if (cantidad > cantidadTotal){
-        return 0;
+        return false;
     }else{
     cantidadTotal -=cantidad;
     estadoActual.cantidadTotal = cantidadTotal.toString();
     console.log("est: "+estadoActual.cantidadTotal);
     
     await modificarCompraById(estadoActual, estadoActual.id);
-
+    return true;
 
     }
     

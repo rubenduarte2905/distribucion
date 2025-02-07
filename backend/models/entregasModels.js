@@ -6,13 +6,13 @@ async function getEntregas(){
 
     var query ='SELECT * FROM entregas';
     var rows = await pool.query(query);
-                    const obj = Object.values(rows);
+ /*                   const obj = Object.values(rows);
                     // muestro otro formato de fecha
                     let i=0;
                     while(i<obj.length){ 
                         obj[i]["fechaEntrega"]  = convertirFechaCorta(obj[i]["fechaEntrega"]);
                     i++;
-                    }
+                    }*/
     return rows;
 
     }

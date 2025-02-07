@@ -4,12 +4,17 @@ var comprasModel = require('../../models/comprasModel');
 var entregasModels = require('../../models/entregasModels');
 
 router.get('/', async (req, res, next)=>{
-    res.render('admin/entregas', {         
-        layout:'admin/layout' ,
-        usuario: req.session.nombre,
-        //compras
+    var entregas = await entregasModels.getEntregas();
+
+     res.render('admin/entregas', {         
+         layout:'admin/layout' ,
+         usuario: req.session.nombre,
+         entregas
+         });
     });
-});
+
+
+
 
 router.get('/agregar', async (req, res, next)=>{
     res.render('admin/entregas', {         
@@ -21,19 +26,35 @@ router.get('/agregar', async (req, res, next)=>{
 
 router.post('/agregar', async (req, res, next)=>{
     try{
+          var estado = false;
           console.log('agregar')  ;
           if(req.body.expedienteOC != "" && req.body.beneficiario!="" && req.body.cantidad != "" && req.body.fechaEntrega !=""){
             await entregasModels.insertarEntregas(req.body);
-            await comprasModel.actualizarStock(req.body);
-            res.redirect('/admin/entregas');  //?resuelto=true
-          }else{
-            res.render('/admin/entregas', {
+            estado = await  comprasModel.actualizarStock(req.body);
+            console.log(estado);
+            if (estado){
+                console.log(estado);
+                res.redirect('/admin/login');  //?resuelto=true
+             } else{
+                console.log(estado);
+                res.render('admin/entregas', {
                 layout:'admin/layout', 
                 error:true,
-                message: 'Todos los campos son requeridos'
-            })
+                message: 'No hay cantidad suficiente'                
+             });
+            
+            };
+        
+          }else{
+            console.log(estado);
+            res.render('admin/entregas', {
+            layout:'admin/layout', 
+            error:true,
+            message: 'Debe completar todos los campos'                
+         });
           }
-    }catch (error){
+        
+         } catch (error){
         console.log(error);
         res.render('admin/entregas',{
             layout: 'admin/layout',
